@@ -10,4 +10,6 @@ export interface Product {
 	category: number;
 	thumbnail: string;
 	brand: string;
+	// Indicates the quantity of items added to the cart
+	quantity?: number;
 }
