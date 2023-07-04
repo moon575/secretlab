@@ -1,42 +1,40 @@
 'use client'
 import { useAppStore } from '../../store/store'
 import useStore from '../../store/useStore';
-import { EmptyCart } from '../../components/EmptyCart'
-import { CartItem } from '../../components/CartItem'
 import React from 'react'
 import { Header } from '../../components/Header';
+import Image from 'next/image';
 import Link from 'next/link';
+import { Counter } from '../../components/Counter';
 
 export default function Home() {
-  const cart = useStore(useAppStore, (state) => state.cart);
+  const { addToCart } = useAppStore();
+  const product = useStore(useAppStore, (state) => state.currentProduct);
+  console.log('current product', product);
+
   return (
-    <div>
+    product && <div>
       <Header />
-      <div className='text-center text-4xl font-semibold mb-8'>
-        Shopping Cart
-      </div>
-      {
-        !cart?.length ? 
-        <EmptyCart /> : 
-        <div className='flex flex-col md:flex-row ' >
-          <div className='rounded-md shadow-lg mx-auto mb-8 w-11/12 md:w-9/12'>
-            {cart?.map(item => <CartItem key={item.id} productId={item.id}/>)}
-          </div>
-          <div className='w-11/12 md:w-2/12 m-auto bg-[#f2f2f2] rounded-md p-8'>
-            <h3 className='font-semibold text-center'>Cart Summary</h3>
-            <div className='font-bold flex justify-between mt-4'><span>Total</span><span>S${cart.reduce((summary, product)=>summary + product.price * product.quantity!, 0)}</span></div>
-          </div>
+      <div className="flex flex-wrap w-full">
+        <div className='p-10 w-full relative h-[400px] lg:w-[400px] lg:grow-0'>
+          <Image className='object-contain' src={product?.images[0] || ''} alt='' fill />
         </div>
-      }
-      <div className='flex justify-center'>
-        <Link href='/' className="mt-6">
-					<button 
-						type="button" 
-						className={'text-white font-[500] py-1.5 px-10 rounded-full bg-theme-red hover:ring-1 hover:ring-theme-red'}
-					>
-						CONTINUE SHOPPING
-					</button>
-				</Link>
+        <div className='p-10 w-full flex flex-col items-center lg:w-[400px] lg:grow lg:items-start'>
+          <h3>{product.title}</h3>
+          <div className="text-theme-red truncate mb-3">{product.description}</div>
+          <div>Price <span>S${product.price}</span></div>
+          <div className='p-3 flex flex-row'>
+            <span>Quantity</span>
+            <Counter product={product} />
+          </div>
+          <button
+            type="button"
+            className={`w-full text-white font-[500] py-1.5 px-3 rounded-md ${product.stock === 0 ? "bg-deep-grey cursor-not-allowed" : "bg-theme-red hover:ring-1 hover:ring-theme-red"}`}
+            onClick={product.stock === 0 ? undefined : () => addToCart(product)}
+          >
+            {product.stock === 0 ? 'Sold Out' : 'Add To Cart'}
+          </button>
+        </div>
       </div>
     </div>
   )

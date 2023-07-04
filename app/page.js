@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className='bg-[#f3f3f5] h-[100vh]'>
       <Header />
-      <div className='flex flex-col w-[256px] sm:w-full sm:flex-row sm:items-center sm:justify-between px-8 h-20 bg-white'>
+      <div className='flex flex-col w-full sm:flex-row sm:items-center sm:justify-between px-8 h-20 bg-white'>
         <select className='focus:outline-none' onChange={changeCategory}>
           <option>
             Category
@@ -66,7 +66,7 @@ export default function Home() {
           }
         </select>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 p-8">
         {filteredProducts.length ? filteredProducts.map(product => <ProductCard key={product.id} {...product} />) : 'No products under current filters!'}
       </div>
     </div>

@@ -11,6 +11,7 @@ export interface ProductSlice {
 export const createProductSlice: StateCreator<ProductSlice> = (set, get) => ({
     products: [],
 		categories: [],
+    currentProduct: undefined,
     fetchProducts: async () => {
 			const res = await fetch('https://dummyjson.com/products?limit=100&skip=0')
 			const data = await res.json();

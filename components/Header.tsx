@@ -9,7 +9,9 @@ export const Header = () => {
 	const cart = useStore(useAppStore, (state) => state.cart);
 	return (
 		<div className="flex items-center justify-between font-semibold px-4 bg-white">
-        <Image src={logo} alt=''/>
+        <Link href={'/'}>
+          <Image src={logo} alt=''/>
+        </Link>
         <Link
           href="/cart"
         >

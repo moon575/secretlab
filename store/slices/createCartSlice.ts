@@ -3,9 +3,11 @@ import { Product } from "../../components/types";
 
 export interface CartSlice {
 	cart: Product[];
+    currentProduct?: Product;
 	addToCart: (product: Product) => void;
 	removeFromCart: (productId: number) => void;
 	updateQuantity: (productId: number, action: 'increase' | 'decrease') => void;
+    setCurrentProduct: (productId: number) => void;
 }
 
 export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
@@ -40,6 +42,9 @@ export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
 		set({ cart: newCart });
 	},
 	removeFromCart: (productId: number) => {
-		set({ cart: get().cart.filter(product => product.id !== productId) })
+		set({ cart: get().cart.filter(product => product.id !== productId) });
 	},
+    setCurrentProduct: (productId) => {
+      set({currentProduct: get().cart.find(p => p.id === productId)})
+    }
 })
