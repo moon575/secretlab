@@ -1,9 +1,8 @@
 'use client'
-import Image from 'next/image'
-import logo from "../public/logo.png";
 import { useAppStore } from '../store/store'
 import useStore from '../store/useStore';
 import { ProductCard } from '../components/ProductCard'
+import { Header } from '../components/Header';
 import React from 'react'
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
   const [ratingRange, setRatingRange] = React.useState([]);
   const [priceRange, setPriceRange] = React.useState([]);
   const categories = useStore(useAppStore, (state) => state.categories);
-  const cart = useStore(useAppStore, (state) => state.cart);
   React.useEffect(() => {
     let newProducts = products;
     if (ratingRange.length === 2) {
@@ -29,24 +27,13 @@ export default function Home() {
     fetchProducts();
     fetchCategories();
   }, [])
-  const toCartPage = () => {
-    console.log('toggle cart');
-  }
   const changeCategory = (e) => {
     fetchProductsByCategory(e.target.value);
   }
 
   return (
     <div className='bg-[#f3f3f5] h-[100vh]'>
-      <div className="flex items-center justify-between font-semibold px-4 bg-white">
-        <Image src={logo} alt=''/>
-        <div className="relative">
-          <button type='button' className='py-1.5 px-3 space-x-1 rounded-md text-sm bg-black text-white hover:ring-1 hover:ring-black' onClick={toCartPage}>
-            My Cart
-          </button>
-          <span className="absolute -right-2 -top-2 bg-theme-red rounded-full text-xs text-white px-1.5 py-0.5">{cart?.reduce((total, product) => total + product.quantity, 0)}</span>
-        </div>
-      </div>
+      <Header />
       <div className='flex flex-col w-[256px] sm:w-full sm:flex-row sm:items-center sm:justify-between px-8 h-20 bg-white'>
         <select className='focus:outline-none' onChange={changeCategory}>
           <option>

@@ -3,14 +3,13 @@ import Image from "next/image"
 import React from "react";
 import { Product } from "./types"
 import { useAppStore } from '../store/store'
-import productImg from "../public/product.png";
 export const ProductCard = (product: Product) => {
 	const { addToCart } = useAppStore()
 	return (
 		<div>
 			<div className="w-full h-80 relative ">
-				<Image src={productImg} alt={product?.title} fill className='rounded-md shadow-lg' />
-				<span className="rounded-full py-0.5 px-3 text-white text-xs absolute top-1 left-1 font-light">{product?.category}</span>
+				<Image src={product?.images[0]} alt={product?.title} fill className='rounded-md shadow-lg' />
+				<span className="rounded-full py-0.5 px-3 text-white text-xs absolute top-1 left-1 font-light bg-theme-red">{product?.category}</span>
 			</div>
 			<div className="px-2 py-3 text-sm text-black-300">
 				<h3 className="font-medium text-lg mb-1">{product?.title}</h3>
