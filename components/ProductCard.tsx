@@ -7,7 +7,7 @@ import Link from "next/link";
 export const ProductCard = (product: Product) => {
 	const { addToCart, setCurrentProduct } = useAppStore()
 	return (
-		<div>
+		<div role="product-card" className="product-card">
 			<div className="w-full h-80 relative bg-white">
 				<Link href={'/detail'} onClick={() => setCurrentProduct(product.id)}>
 					<Image src={product?.images[0]} alt={product?.title} fill className='rounded-md shadow-lg object-contain' />
@@ -16,7 +16,7 @@ export const ProductCard = (product: Product) => {
 			</div>
 			<div className="px-2 py-3 text-sm text-black-300">
 				<Link href={'/detail'} onClick={() => setCurrentProduct(product.id)}>
-					<h3 className="font-medium text-lg mb-1">{product?.title}</h3>
+					<h3 className="product-title font-medium text-lg mb-1">{product?.title}</h3>
 				</Link>
 				<div className="text-font-grey truncate mb-3">{product?.description}</div>
 				<div className="flex items-center justify-between">
