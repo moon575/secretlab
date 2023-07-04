@@ -40,7 +40,7 @@ export default function Home() {
             Category
           </option>
           {
-            categories?.map(category => <option>
+            categories?.map(category => <option key={category}>
               {category}
             </option>)
           }
@@ -50,7 +50,7 @@ export default function Home() {
             Rating
           </option>
           {
-            ratingRanges.map(rating => (<option>
+            ratingRanges.map(rating => (<option key={rating[0]}>
               {`${rating[0]} - ${rating[1]}`}
             </option>))
           }
@@ -60,7 +60,7 @@ export default function Home() {
             Price
           </option>
           {
-            priceRanges.map(price => (<option>
+            priceRanges.map(price => (<option key={price[0]}>
               {`${price[0]} - ${price[1]}`}
             </option>))
           }
