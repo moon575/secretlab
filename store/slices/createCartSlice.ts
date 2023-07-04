@@ -30,15 +30,14 @@ export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
 				findProduct.quantity! += 1;
 			}
 		}
-		set({ cart });
-	},
-	reduceFromCart: (productId: number) => {
-		const cart = get().cart;
-		const findProduct = cart.find(p => p.id === productId);
-		if (findProduct) {
-			findProduct.quantity! -= 1;
-			set({ cart: cart.filter(product => product.quantity) })
-		}
+		const newCart = cart?.map(p => {
+			if (p.id === productId) {
+				return findProduct!;
+			} else {
+				return p
+			}
+		})
+		set({ cart: newCart });
 	},
 	removeFromCart: (productId: number) => {
 		set({ cart: get().cart.filter(product => product.id !== productId) })

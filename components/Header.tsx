@@ -17,7 +17,7 @@ export const Header = () => {
             <button type='button' className='py-1.5 px-3 space-x-1 rounded-md text-sm bg-black text-white hover:ring-1 hover:ring-black'>
               My Cart
             </button>
-            <span className="absolute -right-2 -top-2 bg-theme-red rounded-full text-xs text-white px-1.5 py-0.5">{cart?.length}</span>
+            <span className="absolute -right-2 -top-2 bg-theme-red rounded-full text-xs text-white px-1.5 py-0.5">{cart?.reduce((num, product) => num + product.quantity!, 0)}</span>
           </div>
         </Link>
       </div>
