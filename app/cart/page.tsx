@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className='text-center text-4xl font-semibold mb-8'>
+      <div className='text-center text-4xl font-semibold my-8'>
         Shopping Cart
       </div>
       {

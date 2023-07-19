@@ -1,16 +1,16 @@
 'use client'
 import Image from "next/image"
 import React from "react";
-import logo from '../public/logo.png';
+import logo from '../public/store.png';
 import useStore from '../store/useStore';
 import { useAppStore } from '../store/store'
 import Link from "next/link";
 export const Header = () => {
   const cart = useStore(useAppStore, (state) => state.cart);
   return (
-    <div className="flex items-center justify-between font-semibold px-4 bg-white">
+    <div className="flex items-center justify-between font-semibold px-4 bg-[#fafafa]">
       <Link href={'/'}>
-        <Image src={logo} alt='' />
+        <Image src={logo} alt='' width={200} height={200} />
       </Link>
       <Link
         href="/cart"
